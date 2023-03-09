@@ -17,5 +17,12 @@ describe("Nft-Poops", function () {
     const newMintedToken = await nftPoops.payToMint(recipient, metadataURI, {
       value: ethers.utils.parseEther("0.05"),
     });
+
+    await newMintedToken.wait();
+
+    balance = await nftPoops.balanceOf(recipient);
+    expect(balance).to.equal(1);
+
+    expect(await nftPoops.isContentOwned(metadataURI).to.equal(true));
   });
 });
