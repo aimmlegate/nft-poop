@@ -3,12 +3,12 @@ import { useCount } from "../../hooks/useCount";
 import { Balance } from "../Balance/Balance";
 import { ConnectWallet } from "../ConnectWallet/ConnectWallet";
 import { useEthers } from "../EthersProvider/EthersProvider";
-
+import { NftImage } from "../NftImage/NftImage";
 
 export const Layout = () => {
   const { provider } = useEthers();
   const { data } = useCount();
-  
+
   return (
     <>
       <Navbar isBordered variant="sticky">
@@ -26,21 +26,29 @@ export const Layout = () => {
         <div>
           <Spacer y={3} />
           <Text h2 size="$3xl">
-            The worst NFT collection
+            The worthless NFT collection
           </Text>
           <span>{data}</span>
 
-          {/* <Grid.Container gap={2} justify="center">
-            <Grid xs={4}>
-              <MockItem text="1 of 3" />
-            </Grid>
-            <Grid xs={4}>
-              <MockItem text="2 of 3" />
-            </Grid>
-            <Grid xs={4}>
-              <MockItem text="3 of 3" />
-            </Grid>
-          </Grid.Container> */}
+          <Container
+            gap={0}
+            css={{
+              display: "grid",
+              gap: "1.5rem",
+              gridAautoRows: "minmax(0px, 1fr)",
+              gridTemplateColumns: "repeat(5, minmax(0,1fr))",
+            }}
+          >
+            <NftImage />
+            <NftImage />
+            <NftImage />
+            <NftImage />
+            <NftImage />
+            <NftImage />
+            <NftImage />
+            <NftImage />
+            <NftImage />
+          </Container>
         </div>
       </Container>
     </>

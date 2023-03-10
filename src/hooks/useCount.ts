@@ -10,7 +10,7 @@ export const useCount = () => {
     ["count"],
     async () => {
       const count = await contract!.count();
-      return ethers.utils.formatUnits(count);
+      return parseInt(ethers.utils.formatUnits(count));
     },
     { enabled: !!contract }
   );
