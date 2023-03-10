@@ -1,17 +1,24 @@
-import { Card, createTheme, NextUIProvider, Text } from "@nextui-org/react";
+import { createTheme, NextUIProvider } from "@nextui-org/react";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import { Balance } from "./components/Balance/Balance";
 
 const darkTheme = createTheme({
   type: "dark",
 });
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <NextUIProvider theme={darkTheme}>
-      <Card css={{ mw: "400px" }}>
-        <Card.Body>
-          <Text>A basic card</Text>
-        </Card.Body>
-      </Card>
+      <QueryClientProvider client={queryClient}>
+        <Balance />
+      </QueryClientProvider>
     </NextUIProvider>
   );
 }
