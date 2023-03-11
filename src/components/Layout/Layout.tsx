@@ -4,10 +4,13 @@ import { Balance } from "../Balance/Balance";
 import { ConnectWallet } from "../ConnectWallet/ConnectWallet";
 import { useEthers } from "../EthersProvider/EthersProvider";
 import { NftImage } from "../NftImage/NftImage";
+import { range } from "lodash";
 
 export const Layout = () => {
   const { provider } = useEthers();
   const { data } = useCount();
+
+  const initialCount = data ?? 1;
 
   return (
     <>
@@ -28,7 +31,6 @@ export const Layout = () => {
           <Text h2 size="$3xl">
             The worthless NFT collection
           </Text>
-          <span>{data}</span>
 
           <Container
             gap={0}
@@ -39,15 +41,9 @@ export const Layout = () => {
               gridTemplateColumns: "repeat(5, minmax(0,1fr))",
             }}
           >
-            <NftImage />
-            <NftImage />
-            <NftImage />
-            <NftImage />
-            <NftImage />
-            <NftImage />
-            <NftImage />
-            <NftImage />
-            <NftImage />
+            {range(1, initialCount + 1).map((id) => (
+              <NftImage id={id} key={id} />
+            ))}
           </Container>
         </div>
       </Container>

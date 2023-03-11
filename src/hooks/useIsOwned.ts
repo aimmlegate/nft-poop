@@ -1,15 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { ethers } from "ethers";
 import { useNftPoopsContract } from "./useNftPoopsContract";
 
-export const useCount = () => {
+export const useIsContentOwned = (id: string) => {
   const contract = useNftPoopsContract();
 
   return useQuery(
-    ["count"],
+    ["isContentOwned", id],
     async () => {
-      const count = await contract!.count();
-      return parseInt(ethers.utils.formatUnits(count));
+      const isOwned = await contract!.isContentOwned(id);
+      return isOwned;
     },
     { enabled: !!contract }
   );
