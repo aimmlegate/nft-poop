@@ -19,7 +19,7 @@ export const NftImage: React.FC<Props> = ({ id }) => {
     return <Loading size="xl" type="default" />;
   }
 
-  if (!isOwned) {
+  if (isOwned) {
     return <Owned id={id} />;
   }
 

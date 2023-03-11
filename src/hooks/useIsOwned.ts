@@ -8,6 +8,7 @@ export const useIsContentOwned = (id: string) => {
     ["isContentOwned", id],
     async () => {
       const isOwned = await contract!.isContentOwned(id);
+
       return isOwned;
     },
     { enabled: !!contract }

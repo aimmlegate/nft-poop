@@ -1,4 +1,5 @@
 import { Container, Loading, Navbar, Spacer, Text } from "@nextui-org/react";
+import { useIsFetching } from "@tanstack/react-query";
 import { range } from "lodash";
 import { useCount } from "../../hooks/useCount";
 import { Balance } from "../Balance/Balance";
@@ -9,6 +10,7 @@ import { NftImage } from "../NftImage/NftImage";
 export const Layout = () => {
   const { provider } = useEthers();
   const { data, isLoading } = useCount();
+  const isFetching = useIsFetching();
 
   const initialCount = data ?? 0;
 
@@ -22,6 +24,7 @@ export const Layout = () => {
           <Text b color="inherit" size="$xl">
             NFT POOPS
           </Text>
+          {!!isFetching && <Loading type="gradient" size="xs" />}
         </Navbar.Brand>
         <Navbar.Content>
           {!provider && <ConnectWallet />}
@@ -49,7 +52,7 @@ export const Layout = () => {
                     gridTemplateColumns: "repeat(5, minmax(0,1fr))",
                   }}
                 >
-                  {genRange(1, initialCount + 1).map((id) => (
+                  {genRange(1, initialCount + 2).map((id) => (
                     <NftImage id={id} key={id} />
                   ))}
                 </Container>

@@ -1,6 +1,6 @@
-import { Button, Card, Row, Text } from "@nextui-org/react";
+import { Button, Card, Popover, Row, Text } from "@nextui-org/react";
 import { useQuery } from "@tanstack/react-query";
-import { PREVIEW_LINK_IMG, PREVIEW_LINK_META } from "./consts";
+import { IPFS_CONTENT_ID, PREVIEW_LINK_IMG, PREVIEW_LINK_META } from "./consts";
 
 interface Props {
   id: number;
@@ -18,7 +18,7 @@ export const Owned: React.FC<Props> = ({ id }) => {
         <Text b>{metadata?.data?.name}</Text>
       </Card.Header>
       <Card.Image
-        src={`${PREVIEW_LINK_IMG}${id}`}
+        src={`${PREVIEW_LINK_IMG}${id}.png`}
         objectFit="cover"
         showSkeleton
         maxDelay={300}
@@ -26,10 +26,25 @@ export const Owned: React.FC<Props> = ({ id }) => {
         alt={metadata?.data?.name}
       />
       <Card.Footer>
-        <Row justify="flex-start">
-          <Button size="sm" color="secondary">
-            Learn more
-          </Button>
+        <Row justify="center">
+          <Popover>
+            <Popover.Trigger>
+              <Button
+                size="sm"
+                color="primary"
+                onPress={() => {
+                  navigator.clipboard.writeText(
+                    `https://ipfs.filebase.io/ipfs/${IPFS_CONTENT_ID}/${id}.json`
+                  );
+                }}
+              >
+                Copy IPFS url
+              </Button>
+            </Popover.Trigger>
+            <Popover.Content>
+              <Text css={{ p: "$10" }}>Copied</Text>
+            </Popover.Content>
+          </Popover>
         </Row>
       </Card.Footer>
     </Card>

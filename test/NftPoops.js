@@ -12,6 +12,8 @@ describe("Nft-Poops", function () {
     const metadataURI = "cid/test.png";
 
     let balance = await nftPoops.balanceOf(recipient);
+    let count = await nftPoops.count();
+
     expect(balance).to.equal(0);
 
     const newMintedToken = await nftPoops.payToMint(recipient, metadataURI, {
@@ -21,8 +23,9 @@ describe("Nft-Poops", function () {
     await newMintedToken.wait();
 
     balance = await nftPoops.balanceOf(recipient);
-    expect(balance).to.equal(1);
+    count = await await nftPoops.count();
 
     expect(await nftPoops.isContentOwned(metadataURI).to.equal(true));
+    expect(ethers.utils.formatUnits(count).to.equal(1));
   });
 });
