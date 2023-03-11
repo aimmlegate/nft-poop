@@ -6,6 +6,7 @@ import { useMetamask } from "./useMetamask";
 export const useBalance = () => {
   const { provider } = useEthers();
   const { account } = useMetamask();
+
   return useQuery<string>(
     ["balance"],
     async () => {

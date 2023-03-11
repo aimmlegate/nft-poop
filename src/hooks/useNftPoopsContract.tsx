@@ -8,6 +8,7 @@ export const useNftPoopsContract = () => {
   if (!provider) {
     return;
   }
+
   const signer = provider.getSigner();
   const contract = NftPoops__factory.connect(ADDRESS, signer);
 

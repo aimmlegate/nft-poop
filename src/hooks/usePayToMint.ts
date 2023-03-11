@@ -15,7 +15,7 @@ export const usePayToMint = () => {
       const transaction = await contract!.payToMint(account!, metadataURI, {
         value: ethers.utils.parseEther("0.05"),
       });
-      console.log(transaction)
+
       await provider?.waitForTransaction(transaction.hash!);
     },
     onSettled() {

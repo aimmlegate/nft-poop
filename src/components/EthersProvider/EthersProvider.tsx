@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 interface EthersContext {
   provider: ethers.providers.Web3Provider | undefined;
@@ -19,6 +19,12 @@ export const EthersProvider: React.FC<Props> = ({ children }) => {
   const [provider, setProvider] = useState<
     ethers.providers.Web3Provider | undefined
   >();
+
+  useEffect(() => {
+    if (window.ethereum) {
+      setProvider(new ethers.providers.Web3Provider(window.ethereum));
+    }
+  }, []);
 
   return (
     <EthersContext.Provider

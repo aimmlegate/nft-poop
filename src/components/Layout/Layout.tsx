@@ -21,7 +21,7 @@ export const Layout = () => {
     <>
       <Navbar isBordered variant="sticky">
         <Navbar.Brand>
-          <Text b color="inherit" size="$xl">
+          <Text b color="inherit" size="$xl" css={{ paddingRight: "15px" }}>
             NFT POOPS
           </Text>
           {!!isFetching && <Loading type="gradient" size="xs" />}
