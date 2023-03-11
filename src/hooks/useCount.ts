@@ -9,9 +9,6 @@ export const useCount = () => {
     ["count"],
     async () => {
       const count = await contract!.count();
-
-      console.log(count)
-      console.log(ethers.utils.formatUnits(count, "wei"))
       return parseInt(ethers.utils.formatUnits(count, "wei"));
     },
     { enabled: !!contract }
