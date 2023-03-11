@@ -1,16 +1,19 @@
-import { Container, Grid, Navbar, Spacer, Text } from "@nextui-org/react";
+import { Container, Loading, Navbar, Spacer, Text } from "@nextui-org/react";
+import { range } from "lodash";
 import { useCount } from "../../hooks/useCount";
 import { Balance } from "../Balance/Balance";
 import { ConnectWallet } from "../ConnectWallet/ConnectWallet";
 import { useEthers } from "../EthersProvider/EthersProvider";
 import { NftImage } from "../NftImage/NftImage";
-import { range } from "lodash";
 
 export const Layout = () => {
   const { provider } = useEthers();
-  const { data } = useCount();
+  const { data, isLoading } = useCount();
 
-  const initialCount = data ?? 1;
+  const initialCount = data ?? 0;
+
+  const genRange = (start: number, end: number) =>
+    start === end ? [start] : range(start, end);
 
   return (
     <>
@@ -25,26 +28,34 @@ export const Layout = () => {
           {provider && <Balance />}
         </Navbar.Content>
       </Navbar>
+
       <Container>
         <div>
           <Spacer y={3} />
           <Text h2 size="$3xl">
             The worthless NFT collection
           </Text>
-
-          <Container
-            gap={0}
-            css={{
-              display: "grid",
-              gap: "1.5rem",
-              gridAautoRows: "minmax(0px, 1fr)",
-              gridTemplateColumns: "repeat(5, minmax(0,1fr))",
-            }}
-          >
-            {range(1, initialCount + 1).map((id) => (
-              <NftImage id={id} key={id} />
-            ))}
-          </Container>
+          <Spacer y={2} />
+          {provider && (
+            <>
+              {isLoading && <Loading type="points" />}
+              {!isLoading && (
+                <Container
+                  gap={0}
+                  css={{
+                    display: "grid",
+                    gap: "1.5rem",
+                    gridAautoRows: "minmax(0px, 1fr)",
+                    gridTemplateColumns: "repeat(5, minmax(0,1fr))",
+                  }}
+                >
+                  {genRange(1, initialCount + 1).map((id) => (
+                    <NftImage id={id} key={id} />
+                  ))}
+                </Container>
+              )}
+            </>
+          )}
         </div>
       </Container>
     </>
