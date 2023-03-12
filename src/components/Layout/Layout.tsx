@@ -1,4 +1,11 @@
-import { Container, Loading, Navbar, Spacer, Text } from "@nextui-org/react";
+import {
+  Card,
+  Container,
+  Loading,
+  Navbar,
+  Spacer,
+  Text,
+} from "@nextui-org/react";
 import { useIsFetching } from "@tanstack/react-query";
 import { range } from "lodash";
 import { useCount } from "../../hooks/useCount";
@@ -9,7 +16,7 @@ import { NftImage } from "../NftImage/NftImage";
 
 export const Layout = () => {
   const { provider } = useEthers();
-  const { data, isLoading } = useCount();
+  const { data, isLoading, isError } = useCount();
   const isFetching = useIsFetching();
 
   const initialCount = data ?? 0;
@@ -38,7 +45,14 @@ export const Layout = () => {
             The worthless NFT collection
           </Text>
           <Spacer y={2} />
-          {provider && (
+          {isError && (
+            <Card>
+              <Card.Body>
+                <Text color="error">Something went wrong</Text>
+              </Card.Body>
+            </Card>
+          )}
+          {provider && !isError && (
             <>
               {isLoading && <Loading type="points" />}
               {!isLoading && (
