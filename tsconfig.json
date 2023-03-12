@@ -17,5 +17,6 @@
     "jsx": "react-jsx"
   },
   "references": [{ "path": "./tsconfig.node.json" }],
-  "include": ["src", "./scripts", "./test", "./typechain-types"]
+  "include": ["src", "./scripts", "./test", "./typechain-types"],
+  "exclude": ["hardhat.config.ts"]
 }
