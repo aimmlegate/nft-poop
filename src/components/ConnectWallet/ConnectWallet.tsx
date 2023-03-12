@@ -1,10 +1,11 @@
 import { Button } from "@nextui-org/react";
-import { useMetamask } from "../../hooks/useMetamask";
 import { MetamaskFoxIcon } from "./MetamaskFoxIcon";
 
-export const ConnectWallet = () => {
-  const { connect, error } = useMetamask();
+interface Props {
+  connect: () => void;
+}
 
+export const ConnectWallet: React.FC<Props> = ({ connect }) => {
   return (
     <Button
       auto

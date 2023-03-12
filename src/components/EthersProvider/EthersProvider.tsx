@@ -20,6 +20,7 @@ export const EthersProvider: React.FC<Props> = ({ children }) => {
     ethers.providers.Web3Provider | undefined
   >();
 
+
   useEffect(() => {
     if (window.ethereum) {
       setProvider(new ethers.providers.Web3Provider(window.ethereum));

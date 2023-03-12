@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ethers } from "ethers";
+import { useMetaMask } from "metamask-react";
 import { useEthers } from "../components/EthersProvider/EthersProvider";
-import { useMetamask } from "./useMetamask";
 import { useNftPoopsContract } from "./useNftPoopsContract";
 
 export const usePayToMint = () => {
   const contract = useNftPoopsContract();
   const queryClient = useQueryClient();
-  const { account } = useMetamask();
+  const { account } = useMetaMask();
   const { provider } = useEthers();
 
   return useMutation({

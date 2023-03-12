@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "compile": "npx hardhat compile --force",
+    "deploy": "npx hardhat run --network localhost scripts/deploy.js",
+    "node": "npx hardhat node"
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.12",
@@ -15,6 +18,7 @@
     "@tanstack/react-query-devtools": "^4.26.1",
     "ethers": "^5.7.2",
     "lodash": "^4.17.21",
+    "metamask-react": "^2.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

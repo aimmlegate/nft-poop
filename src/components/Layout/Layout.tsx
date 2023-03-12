@@ -2,9 +2,9 @@ import { Container, Loading, Navbar, Spacer, Text } from "@nextui-org/react";
 import { useIsFetching } from "@tanstack/react-query";
 import { range } from "lodash";
 import { useCount } from "../../hooks/useCount";
-import { Balance } from "../Balance/Balance";
-import { ConnectWallet } from "../ConnectWallet/ConnectWallet";
+import { Connect } from "../Connect/Connect";
 import { useEthers } from "../EthersProvider/EthersProvider";
+import { GalleryContainer } from "../GalleryContainer/GalleryContainer";
 import { NftImage } from "../NftImage/NftImage";
 
 export const Layout = () => {
@@ -27,8 +27,7 @@ export const Layout = () => {
           {!!isFetching && <Loading type="gradient" size="xs" />}
         </Navbar.Brand>
         <Navbar.Content>
-          {!provider && <ConnectWallet />}
-          {provider && <Balance />}
+          <Connect />
         </Navbar.Content>
       </Navbar>
 
@@ -43,19 +42,11 @@ export const Layout = () => {
             <>
               {isLoading && <Loading type="points" />}
               {!isLoading && (
-                <Container
-                  gap={0}
-                  css={{
-                    display: "grid",
-                    gap: "1.5rem",
-                    gridAautoRows: "minmax(0px, 1fr)",
-                    gridTemplateColumns: "repeat(5, minmax(0,1fr))",
-                  }}
-                >
+                <GalleryContainer>
                   {genRange(1, initialCount + 2).map((id) => (
                     <NftImage id={id} key={id} />
                   ))}
-                </Container>
+                </GalleryContainer>
               )}
             </>
           )}

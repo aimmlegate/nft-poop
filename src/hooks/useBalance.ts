@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { ethers } from "ethers";
 import { useEthers } from "../components/EthersProvider/EthersProvider";
-import { useMetamask } from "./useMetamask";
+import { useMetaMask } from "metamask-react";
 
 export const useBalance = () => {
   const { provider } = useEthers();
-  const { account } = useMetamask();
+  const { account } = useMetaMask();
 
   return useQuery<string>(
     ["balance"],
