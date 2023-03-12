@@ -13,11 +13,7 @@ export const NftImage: React.FC<Props> = ({ id }) => {
 
   const mint = usePayToMint();
 
-  const { data: isOwned, isLoading } = useIsContentOwned(getContentId(id));
-
-  if (isLoading) {
-    return <Loading size="xl" type="default" />;
-  }
+  const { data: isOwned } = useIsContentOwned(getContentId(id));
 
   if (isOwned) {
     return <Owned id={id} />;
