@@ -20,8 +20,7 @@ export const usePayToMint = () => {
     },
     onSettled() {
       queryClient.invalidateQueries({
-        queryKey: ["count"],
-        exact: true,
+        queryKey: ["count", "isContentOwned"],
       });
     },
   });

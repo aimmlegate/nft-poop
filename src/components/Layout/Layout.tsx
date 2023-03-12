@@ -8,6 +8,7 @@ import {
 } from "@nextui-org/react";
 import { useIsFetching } from "@tanstack/react-query";
 import { range } from "lodash";
+import { useMetaMask } from "metamask-react";
 import { useCount } from "../../hooks/useCount";
 import { Connect } from "../Connect/Connect";
 import { useEthers } from "../EthersProvider/EthersProvider";
@@ -17,6 +18,7 @@ import { NftImage } from "../NftImage/NftImage";
 export const Layout = () => {
   const { provider } = useEthers();
   const { data, isLoading, isError } = useCount();
+  const { status } = useMetaMask();
   const isFetching = useIsFetching();
 
   const initialCount = data ?? 0;
@@ -45,22 +47,26 @@ export const Layout = () => {
             The worthless NFT collection
           </Text>
           <Spacer y={2} />
-          {isError && (
-            <Card>
-              <Card.Body>
-                <Text color="error">Something went wrong</Text>
-              </Card.Body>
-            </Card>
-          )}
-          {provider && !isError && (
+          {status === "connected" && (
             <>
-              {isLoading && <Loading type="points" />}
-              {!isLoading && (
-                <GalleryContainer>
-                  {genRange(1, initialCount + 2).map((id) => (
-                    <NftImage id={id} key={id} />
-                  ))}
-                </GalleryContainer>
+              {isError && (
+                <Card>
+                  <Card.Body>
+                    <Text color="error">Something went wrong</Text>
+                  </Card.Body>
+                </Card>
+              )}
+              {provider && !isError && (
+                <>
+                  {isLoading && <Loading type="points" />}
+                  {!isLoading && (
+                    <GalleryContainer>
+                      {genRange(1, initialCount + 2).map((id) => (
+                        <NftImage id={id} key={id} />
+                      ))}
+                    </GalleryContainer>
+                  )}
+                </>
               )}
             </>
           )}
