@@ -1,13 +1,15 @@
-# Sample NFT Project
+# Web3 Hello world NFT Project
+  
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+live https://aimmlegate.github.io/nft-poop/
 
-Try running some of the following tasks:
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+Using: 
+ - openzepelin
+ - hardhat
+ - ethers.js
+ - react-query
+ - vite
+
+Images generetad by [HashLips](https://github.com/HashLips/hashlips_art_engine)
+Contract deployed to Poliigon Mumbai 
